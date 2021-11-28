@@ -9,7 +9,7 @@ Energy is a vital resource in IoT because it extends the device lifetime and thu
 
 ### Clone
 
-- Clone this repository to your local machine using `https://github.com/davidjmc/amot`
+- Clone this repository to your local machine using `https://github.com/davidjmc/BatteryLevelMonitor.git`
 
 ### Setup
 
@@ -31,20 +31,18 @@ TODO
 
 | **PhD Student** | **Collaborator** | **Collaborator** | **Professor** |
 | :---: |:---:| :---:| :---:|
-| [![PhD Student](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/d.jpeg)](http://lattes.cnpq.br/8585426872891843) | [![Research Collaborator](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/r.jpeg)](http://lattes.cnpq.br/9211915276537655) | [![Research Collaborator](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/J.jpeg)](http://lattes.cnpq.br) | [![Professor](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/n.jpeg)](http://lattes.cnpq.br/4220236737158909) |
+| [![PhD Student](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/d.jpeg)](http://lattes.cnpq.br/8585426872891843) | [![Research Collaborator](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/r.jpeg)](http://lattes.cnpq.br/9211915276537655) | [![Research Collaborator](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/J.jpg)](http://lattes.cnpq.br) | [![Professor](https://raw.githubusercontent.com/davidjmc/amot/master/phd/team/n.jpeg)](http://lattes.cnpq.br/4220236737158909) |
 | <a href="http://lattes.cnpq.br/8585426872891843" target="_blank">`David Cavalcanti`</a> | <a href="http://lattes.cnpq.br/9211915276537655" target="_blank">`Ranieri Carvalho`</a> | <a href="http://lattes.cnpq.br" target="_blank">`Johnatas`</a> | <a href="http://lattes.cnpq.br/4220236737158909" target="_blank">`Nelson Rosa`</a> |
 
 ## References
 
 - Books
 
-  - M. Voelter, M. Kircher, and U. Zdun, Remoting Patterns: Foundations of Enterprise, Internet and Realtime Distributed Object Middleware, Pattern Series. John Wiley and Sons, 2004.
-
-  - S. Tarkoma, Publish/Subscriber Systems: Design and Principles, 1st Edition, Wiley series in communications networking & distributed systems, Wiley, s.l., 2012, doi:10.1002/9781118354261.
+  - TODO.
 
 - Journals and Papers
 
-  - N.S. Rosa, G.M.M. Campos, and D.J.M. Cavalcanti, Lightweight formalisation of adaptive middleware, Journal of Systems Architecture, 2019, doi:10.1016/j.sysarc.2018.12.002.
+  - TODO.
 
 - Frameworks, Tools and Technology
 
