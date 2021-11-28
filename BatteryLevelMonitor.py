@@ -74,9 +74,10 @@ def mesure_voltage_and_percentage():
     voltage = voltage * ratioFactor
     percent = map(voltage, voltageMin, voltageMax, 0, 100)
 
-    print('Voltage: %.2f and Charge: %.2d' % (voltage, percent))
+    print('Voltage: {v:.2f} and Charge: {c:.2d}'.format(v=voltage, c=percent))
 
-    payload = "field1=%.2f&field2=%.2f" % (voltage, percent)
+    payload = "field1={v:.2f}&field2={c:.2f}".format(v=voltage, c=percent)
+
 
   return payload
 
