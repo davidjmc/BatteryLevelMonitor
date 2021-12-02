@@ -83,17 +83,19 @@ def map_float(v, in_min, in_max, out_min, out_max):
 ## Function to mesure Voltage and Percentage
 def mesure_voltage_and_percentage():
     #voltageRaw = adc.read()
-    voltageRaw = 500
+    voltageRaw = 939
     ratioFactor = 1.35
 
     voltage_pinA0 = map_float(voltageRaw, 0, 1023, voutMin, voutMax)
     print('Voltage on pin A0: {v:.2f}'.format(v=voltage_pinA0))
 
-    voltage_battery = voltage_pinA0 * ratioFactor
+    #voltage_battery = voltage_pinA0 * ratioFactor
+
+    voltage_battery = map_float(voltage_pinA0, voutMin, voutMax, vinMin, vinMax)
 
     print('Voltage on battery: {v:.2f}'.format(v=voltage_battery))
 
-    percent_battery = map(voltage_battery, 2.8, 4.2, 0, 100)
+    percent_battery = map(voltage_battery, vinMin, vinMax, 0, 100)
 
     print('Voltage: {v:.2f} and Charge: {c:.2f}'.format(v=voltage_battery, c=percent_battery))
 
