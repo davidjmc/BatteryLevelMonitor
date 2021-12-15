@@ -39,6 +39,7 @@ def do_connect():
 
     print('Network Configuration:', wifi.ifconfig())
 
+# ESP8266
 ## Run connect function
 #do_connect()
 
@@ -47,29 +48,21 @@ SERVER = "mqtt.thingspeak.com"
 CHANNEL_ID = "YOUR CHANNEL ID"
 THINGSPEAK_WRITE_KEY = "YOUR API ID"
 
-## MQTT Settings
-#client = MQTTClient("umqtt_client", SERVER) # MQTT client object
-#topic = "channels/" + CHANNEL_ID + "/publish/" + THINGSPEAK_WRITE_KEY # Create a MQTT topic string
-#PUB_TIME_SEC = 30
-
 
 # timings in seconds
 MESUREMENT_INTERVAL = 10
 LAST_MESUREMENT_TIME = 0.0
 PUB_TIME_SEC = 5
 
+# ESP8266
 ## Application Settings
-#adc = ADC(0)
-adc = 500        # Analog channel A0 used to get battery voltage
-ratioFactor = 1.3   # Resistors ration factor
+#adc = ADC(0)        # Analog channel A0 used to get battery voltage
+#PUB_TIME_SEC = 30
+
 
 # Battery Settings
 vinMax = 4.2
 vinMin = 2.8
-
-# Voltage Divider 3.158 and 2.105
-voutMax = 3.1
-voutMin = 2.1
 
 ## Function to map Voltage to Percentage
 def map(v, in_min, in_max, out_min, out_max):
@@ -82,38 +75,60 @@ def map_float(v, in_min, in_max, out_min, out_max):
 
 ## Function to mesure Voltage and Percentage
 def mesure_voltage_and_percentage():
-    #voltageRaw = adc.read()
-    voltageRaw = 939
-    ratioFactor = 1.35
+    ratioFactor = 1.27   # Resistors ration factor
+    #raw = 0
 
-    voltage_pinA0 = map_float(voltageRaw, 0, 1023, voutMin, voutMax)
+    # ESP8266
+    #for r in range(5):
+        #raw = raw + adc.read()
+        #time.sleep(1)
+    #voltageRaw = raw/5.0
+
+    #test
+    voltageRaw = 980
+    print('Voltage Raw: {c:.2f}'.format(c=voltageRaw))
+
+    voltage_pinA0 = (voltageRaw / 1024) * 3.3
     print('Voltage on pin A0: {v:.2f}'.format(v=voltage_pinA0))
 
-    #voltage_battery = voltage_pinA0 * ratioFactor
-
-    voltage_battery = map_float(voltage_pinA0, voutMin, voutMax, vinMin, vinMax)
-
+    voltage_battery = voltage_pinA0 * ratioFactor
     print('Voltage on battery: {v:.2f}'.format(v=voltage_battery))
 
     percent_battery = map(voltage_battery, vinMin, vinMax, 0, 100)
+    print('Voltage: {v:.2f} and Charge: {c:.2f} and Raw: {r:.2f}'.format(v=voltage_battery, c=percent_battery, r=voltageRaw))
 
-    print('Voltage: {v:.2f} and Charge: {c:.2f}'.format(v=voltage_battery, c=percent_battery))
-
-    payload = "field1={v:.2f}&field2={c:.2f}".format(v=voltage_battery, c=percent_battery)
-
+    payload = "field1={v:.2f}&field2={c:.2f}&field3={r}&field4={p:.2f}".format(v=voltage_battery, c=percent_battery, r=voltageRaw, p=voltage_pinA0)
     return payload
+
+
+# ESP8266
+def restart_and_reconnect():
+    print('Failed to connect to MQTT broker. Reconnecting...')
+    time.sleep(10)
+    machine.reset()
+
 
 ## Main function
 def main():
+
+    ## MQTT Settings
+    #client = MQTTClient("umqtt_client", SERVER) # MQTT client object
+    #topic = "channels/" + CHANNEL_ID + "/publish/" + THINGSPEAK_WRITE_KEY # Create a MQTT topic string
+
     while True:
-        #current_time = time.time()
-        #if current_time - LAST_MESUREMENT_TIME > MESUREMENT_INTERVAL:
-            payload = mesure_voltage_and_percentage()
-            #client.connect()
-            #client.publish(topic, payload)
-            #client.disconnect()
-            #LAST_MESUREMENT_TIME = current_time
-            time.sleep(PUB_TIME_SEC)
+        payload = mesure_voltage_and_percentage()
+
+        # test with mqtt
+        #client.connect()
+        #client.publish(topic, payload)
+        #client.disconnect()
+        time.sleep(PUB_TIME_SEC)
 
     ## Run main function
 main()
+
+# ESP8266
+#try:
+#    main()
+#except OSError as e:
+#    restart_and_reconnect()
